@@ -18,8 +18,8 @@ bot.on('message', (data) => {
 })
 // 条件を指定
 const handleMessage = (data) => {
-  // 第二条件を指定しない場合、ループしてしまう
-  if (data.text.includes(' yeah') && data.subtype !== 'bot_message') {
+  // ループを回避
+  if (data.subtype !== 'bot_message') {
     sayYeah(data);
   }
 }
