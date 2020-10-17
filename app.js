@@ -9,25 +9,27 @@ const bot = new SlackBot({
 
 // slackbotが追加されているチャンネルのmessageイベントをリッスン
 bot.on('message', (data) => {
+  console.log(data)
   if (data.type !== 'message') {
     return;
   }
 
-  handleMessage(data.text)
+  handleMessage(data)
 })
-
-const handleMessage = (message) => {
-  if (message.includes(' yeah')) {
-    sayYeah();
+// 条件を指定
+const handleMessage = (data) => {
+  // 第二条件を指定しない場合、ループしてしまう
+  if (data.text.includes(' yeah') && data.subtype !== 'bot_message') {
+    sayYeah(data);
   }
 }
-
-const sayYeah = () => {
+// 処理の実行
+const sayYeah = (data) => {
   const params = {
     icon_emoji: ':dog:'
   };
 
-  bot.postMessageToChannel('bundle-test', '管理内チャンネルでmsg投稿がありました', params);
+  bot.postMessageToChannel('bundle-test', data.text, params);
 }
 
 // Error Handler
