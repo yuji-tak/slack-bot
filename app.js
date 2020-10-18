@@ -7,9 +7,8 @@ const bot = new SlackBot({
   name: 'bot'
 });
 
-// slackbotが追加されているチャンネルのmessageイベントをリッスン
+// slackbotsが追加されているチャンネルのmessageイベントをリッスン
 bot.on('message', (data) => {
-  console.log(data)
   if (data.type !== 'message') {
     return;
   }
@@ -26,11 +25,15 @@ const handleMessage = (data) => {
 // 処理の実行
 const sayYeah = (data) => {
   const params = {
-    icon_emoji: ':dog:'
+    icon_emoji: ':cat:',
+    attachments: [{
+      "color": "#f2c744",
+      "text": `<@${data.user}>`,
+      "ts": data.ts
+    }]
   };
 
   bot.postMessageToChannel('bundle-test', data.text, params);
 };
-
 // Error Handler
-bot.on('error', err => console.log('from here', err));
+bot.on('error', err => console.log(err));
