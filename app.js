@@ -19,11 +19,11 @@ bot.on('message', (data) => {
 const handleMessage = (data) => {
   // ループを回避
   if (data.subtype !== 'bot_message') {
-    sayYeah(data);
+    postMessage(data);
   }
 };
 // 処理の実行
-const sayYeah = (data) => {
+const postMessage = (data) => {
   const params = {
     icon_emoji: ':cat:',
     attachments: [{
