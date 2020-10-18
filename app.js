@@ -24,6 +24,10 @@ const handleMessage = (data) => {
 };
 // 処理の実行
 const postMessage = (data) => {
+  if (data.text === '' || data.user === undefined) {
+    return;
+  }
+
   const params = {
     icon_emoji: ':cat:',
     attachments: [{
